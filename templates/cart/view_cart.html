@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}My Cart | Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">My Shopping Cart</h2>
+
+    {% if items %}
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>Cover</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>
+                        {% if item.book.cover_image %}
+                            <img src="{{ item.book.cover_image.url }}" alt="{{ item.book.title }}" width="50">
+                        {% else %}
+                            <span class="text-muted">No Image</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.book.title }}</td>
+                    <td>{{ item.book.author }}</td>
+                    <td>₹{{ item.book.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.get_total_price }}</td>
+                    <td>
+                        <a href="{% url 'books:remove_from_cart' item.book.id %}" class="btn btn-sm btn-danger">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-end mt-3">
+            <h4>Total: ₹{{ total }}</h4>
+            <a href="{% url 'orders:checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+        </div>
+    </div>
+    {% else %}
+        <p class="text-muted">Your cart is empty.</p>
+        <a href="{% url 'books:show' %}" class="btn btn-outline-primary mt-3">Browse Books</a>
+    {% endif %}
+</div>
+{% endblock %}
+

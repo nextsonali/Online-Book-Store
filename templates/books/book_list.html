@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}Book Catalogue | Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <h5 class="mb-3">Refine your Search</h5>
+            <div class="mb-3">
+                <strong>By Price</strong>
+                <ul class="list-unstyled">
+                    <li><a href="#">Rs.100 - Rs.500</a></li>
+                    <li><a href="#">Rs.500 - Rs.1000</a></li>
+                    <li><a href="#">Rs.1000 - Rs.2000</a></li>
+                    <li><a href="#">Above Rs.2000</a></li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <strong>By Discount</strong>
+                <ul class="list-unstyled">
+                    <li><a href="#">0% - 10%</a></li>
+                    <li><a href="#">11% - 20%</a></li>
+                    <li><a href="#">21% - 30%</a></li>
+                    <li><a href="#">31% - 40%</a></li>
+                    <li><a href="#">51% - 60%</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="col-md-9">
+            <h4 class="mb-4">Book Catalogue</h4>
+            {% for book in books %}
+            <div class="card mb-4 shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-2 text-center p-2">
+                        {% if book.cover_image %}
+                            <img src="{{ book.cover_image.url }}" class="img-fluid rounded" alt="{{ book.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/100x140" class="img-fluid rounded" alt="No Cover">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">
+                                <strong>By:</strong> {{ book.author }}<br>
+                                <strong>Publisher:</strong> Example Publisher<br>
+                                <strong>Genre:</strong> {{ book.genre }}<br>
+                                <strong>Price:</strong> <span class="text-danger fw-bold">₹{{ book.price }}</span><br>
+                                <strong>Stock:</strong> {{ book.stock }}
+                            </p>
+                            <div class="d-flex gap-2">
+                                <a href="{% url 'books:add_to_cart' book.id %}" class="btn btn-success btn-sm">Add to Cart</a>
+                                <a href="#" class="btn btn-outline-secondary btn-sm">Add to Wishlist</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <p>No books found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

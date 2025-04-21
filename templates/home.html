@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Welcome to the Online Bookstore{% endblock %}
+
+{% block content %}
+<div class="text-center my-5">
+    <h1 class="display-4 mb-3">Welcome to the Online Bookstore 📚</h1>
+    <p class="lead mb-4">Discover your next great read from our curated collection of books.</p>
+    <a href="{% url 'books:show' %}" class="btn btn-primary btn-lg">Browse Books</a>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 text-center">
+        <h4>📦 Fast Delivery</h4>
+        <p>Get your books delivered quickly and reliably.</p>
+    </div>
+    <div class="col-md-4 text-center">
+        <h4>💳 Secure Payment</h4>
+        <p>Pay safely using our trusted payment partners.</p>
+    </div>
+    <div class="col-md-4 text-center">
+        <h4>🌍 Wide Selection</h4>
+        <p>Thousands of titles across genres, authors, and languages.</p>
+    </div>
+</div>
+{% endblock %}
