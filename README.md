@@ -4,7 +4,7 @@ Project structure
 
 onlinebookstore/
 ├── manage.py
-├── onlinebookstore/         # Project settings
+├── onlinebookstore/         
    ├── __init__.py
    ├── settings.py
    ├── urls.py
