@@ -3,7 +3,9 @@ Here's a basic Django setup for a Online Bookstore appication using the MVC arch
 Project structure
 
 onlinebookstore/
+
 ├── manage.py
+
 ├── onlinebookstore/         
    ├── __init__.py
    ├── settings.py
