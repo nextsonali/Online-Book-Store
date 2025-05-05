@@ -5,9 +5,24 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 
+@login_required(login_url='users:login')
 def view_cart(request):
     items = CartItem.objects.filter(user=request.user)
-    total = sum(item.total_price() for item in items)
+    response_data = []
+    total = 0
+    for item in items:
+        item_total = item.quantity * item.book.price
+        print(item_total)
+        total += item_total
+        response_data.append({
+            "book_id": item.book.id,
+            "book_title": item.book.title,
+            "book_author": item.book.author,
+            "book_price": item.book.price,
+            "quantity": item.quantity,
+            "total_price": item_total
+        })
+    #total = sum(item.total_price() for item in items)
     return render(request, 'cart/view_cart.html', {'items': items, 'total': total})
 
 @login_required(login_url='users:login')  # 👈 Redirects to login if not authenticated

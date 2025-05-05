@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load math_filters %}
 {% block title %}Order History | Online Bookstore{% endblock %}
 
 {% block content %}
@@ -32,7 +32,7 @@
                             <td>{{ item.book.title }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>₹{{ item.price }}</td>
-                            <td>₹{{ item.quantity|floatformat:2|add:item.price|floatformat:2 }}</td>
+                            <td>₹{{  item.quantity|multiply:item.price }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

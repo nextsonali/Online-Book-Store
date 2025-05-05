@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from cart.models import CartItem
 from .models import Order, OrderItem
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='users:login')
 def checkout(request):
     cart_items = CartItem.objects.filter(user=request.user)
     if not cart_items.exists():
@@ -20,6 +22,7 @@ def checkout(request):
 
     return redirect('orders:order_history')
 
+@login_required(login_url='users:login')
 def order_history(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'orders/order_histroy.html', {'orders': orders})

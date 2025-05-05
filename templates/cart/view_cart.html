@@ -34,9 +34,12 @@
                     <td>{{ item.book.author }}</td>
                     <td>₹{{ item.book.price }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td>₹{{ item.get_total_price }}</td>
+                    <td>₹{{ item.total_price }}</td>
                     <td>
-                        <a href="{% url 'cart:remove_from_cart' item.book.id %}" class="btn btn-sm btn-danger">Remove</a>
+                        <form action="{% url 'cart:remove_from_cart' item.book_id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}

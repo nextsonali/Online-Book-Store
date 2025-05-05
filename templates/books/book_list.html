@@ -53,7 +53,10 @@
                                 <strong>Stock:</strong> {{ book.stock }}
                             </p>
                             <div class="d-flex gap-2">
-                                <a href="{% url 'cart:add_to_cart' book.id %}" class="btn btn-success btn-sm">Add to Cart</a>
+                                <form method="post" action="{% url 'cart:add_to_cart' book.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit">Add to Cart</button>
+                                </form>
                                 <a href="#" class="btn btn-outline-secondary btn-sm">Add to Wishlist</a>
                             </div>
                         </div>
