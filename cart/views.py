@@ -23,7 +23,7 @@ def view_cart(request):
             "total_price": item_total
         })
     #total = sum(item.total_price() for item in items)
-    return render(request, 'cart/view_cart.html', {'items': items, 'total': total})
+    return render(request, 'cart/view_cart.html', {'items': response_data, 'total': total})
 
 @login_required(login_url='users:login')  # 👈 Redirects to login if not authenticated
 def add_to_cart(request, book_id):
